@@ -1,0 +1,21 @@
+.category-filter {
+  margin: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.category-filter button {
+  padding: 8px 16px;
+  background-color: #ecf0f1;
+  border: 1px solid #bdc3c7;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0;
+}
+
+.category-filter button.active {
+  background-color: #424242;
+  color: white;
+  border-color: #424242;
+}

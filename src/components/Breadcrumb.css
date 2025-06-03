@@ -1,0 +1,26 @@
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+  font-size: 1rem;
+  font-family: Arial, sans-serif;
+}
+
+.breadcrumb-item {
+  color: #666;
+  text-decoration: none;
+  margin-right: 0.5rem;
+}
+
+.breadcrumb-item:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-separator {
+  margin: 0 0.5rem;
+  color: #666;
+}
+
+.home-icon {
+  margin-right: 0.3rem;
+}

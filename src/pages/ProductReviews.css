@@ -1,0 +1,186 @@
+.product-reviews {
+  max-width: 90%;
+  width: 800px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.product-reviews h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.average-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.average-rating-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.average-rating-stars {
+  font-size: 1.2rem;
+}
+
+.star {
+  color: #ccc;
+}
+
+.star.filled {
+  color: #000;
+}
+
+.star:hover,
+.star.filled:hover {
+  color: #555;
+}
+
+.total-reviews {
+  font-size: 1rem;
+  color: #666;
+}
+
+.reviews-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.review-item {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.review-rating {
+  font-size: 1.2rem;
+}
+
+.review-date {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.review-comment {
+  font-size: 1rem;
+  color: #333;
+  margin: 0.5rem 0;
+}
+
+.review-user {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .product-reviews {
+    max-width: 95%;
+    padding: 1rem;
+  }
+
+  .product-reviews h2 {
+    font-size: 1.3rem;
+  }
+
+  .average-rating {
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .average-rating-value {
+    font-size: 1.3rem;
+  }
+
+  .average-rating-stars {
+    font-size: 1rem;
+  }
+
+  .total-reviews {
+    font-size: 0.9rem;
+  }
+
+  .review-item {
+    padding: 0.8rem;
+  }
+
+  .review-rating {
+    font-size: 1rem;
+  }
+
+  .star {
+    font-size: 1rem;
+  }
+
+  .review-date,
+  .review-user {
+    font-size: 0.8rem;
+  }
+
+  .review-comment {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-reviews {
+    padding: 0.5rem;
+  }
+
+  .product-reviews h2 {
+    font-size: 1.1rem;
+  }
+
+  .average-rating {
+    gap: 0.3rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .average-rating-value {
+    font-size: 1.1rem;
+  }
+
+  .average-rating-stars {
+    font-size: 0.9rem;
+  }
+
+  .total-reviews {
+    font-size: 0.8rem;
+  }
+
+  .review-item {
+    padding: 0.5rem;
+  }
+
+  .review-rating {
+    font-size: 0.9rem;
+  }
+
+  .star {
+    font-size: 0.9rem;
+  }
+
+  .review-date,
+  .review-user {
+    font-size: 0.7rem;
+  }
+
+  .review-comment {
+    font-size: 0.8rem;
+  }
+}

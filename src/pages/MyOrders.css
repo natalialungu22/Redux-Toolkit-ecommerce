@@ -1,0 +1,421 @@
+.my-orders {
+  width: 90%;
+  max-width: 810px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.order-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  overflow: hidden;
+}
+
+.order-placed {
+  display: flex;
+  flex-direction: column;
+  background-color: #f9f9f9;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  padding-bottom: 0.75rem;
+  overflow-x: auto;
+}
+
+.order-row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.order-column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.order-column:nth-child(1) {
+  flex: 1;
+}
+
+.order-column:nth-child(2) {
+  flex: 1;
+}
+
+.order-number-column {
+  flex: 1;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.order-column h5 {
+  margin: 0 0 0.5rem 0;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.order-column span {
+  font-weight: 500;
+}
+
+.view-details-btn {
+  margin-top: 0.25rem;
+}
+
+.order-number-label {
+  display: flex;
+  align-items: center;
+}
+
+.order-detail,
+.order-id h5 {
+  margin: 0;
+}
+
+.order-detail {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.order-detail div {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.order-id {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.view-details-btn {
+  color: #000;
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  transition: all 0.2s ease;
+}
+
+.view-details-btn:hover {
+  background-color: #f0f0f0;
+  color: #424242;
+}
+
+.order-id a:hover {
+  color: #0056b3;
+}
+
+.order-items {
+  list-style-type: none;
+  margin: 0;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.item-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem;
+}
+
+.item-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.no-image {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #eee;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.item-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.review-button {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.review-button:hover {
+  background-color: #807b7b;
+  color: white;
+  border-color: #807b7b;
+}
+
+.reviewed-message {
+  color: #666;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+}
+
+.view-reviews-link {
+  color: #000;
+  text-decoration: underline;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease;
+}
+
+.view-reviews-link:hover {
+  color: #807b7b;
+}
+
+/* Review Modal Styles moved to ReviewModal.css */
+
+.review-modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.rating {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.rating label {
+  font-size: 1rem;
+  color: #333;
+}
+
+.stars {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.star {
+  font-size: 1.5rem;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.star.filled {
+  color: #000;
+}
+
+.star:hover,
+.star.filled:hover {
+  color: #555;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.comment label {
+  font-size: 1rem;
+  color: #333;
+}
+
+.comment textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.comment textarea:focus {
+  outline: none;
+  border-color: #000;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.submit-button,
+.cancel-button {
+  padding: 0.5rem 1rem;
+  border: 2px solid black;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+}
+
+.submit-button:hover,
+.cancel-button:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .my-orders {
+    max-width: 95%;
+    padding: 1rem;
+  }
+
+  .orders-list {
+    gap: 1rem;
+  }
+
+  .order-labels,
+  .order-values {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .order-labels h5 {
+    margin-bottom: 0.5rem;
+  }
+
+  .order-values span {
+    margin-bottom: 0.5rem;
+  }
+
+  .view-details-btn {
+    margin-top: 0.5rem;
+    align-self: flex-start;
+  }
+}
+
+.item-image,
+.no-image {
+  width: 50px;
+  height: 50px;
+}
+
+.review-button,
+.reviewed-message,
+.view-reviews-link {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+}
+
+.review-modal {
+  padding: 1rem;
+  max-width: 90%;
+}
+
+.review-modal h3 {
+  font-size: 1.1rem;
+}
+
+.star {
+  font-size: 1.25rem;
+}
+
+.submit-button,
+.cancel-button {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 480px) {
+  .my-orders {
+    padding: 0.5rem;
+  }
+
+  .order-card {
+    padding: 0.5rem;
+  }
+
+  .item-content {
+    gap: 0.75rem;
+  }
+
+  .item-image,
+  .no-image {
+    width: 40px;
+    height: 40px;
+  }
+
+  .item-details span {
+    font-size: 0.9rem;
+  }
+
+  .review-button,
+  .reviewed-message,
+  .view-reviews-link {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .review-modal h3 {
+    font-size: 1rem;
+  }
+
+  .star {
+    font-size: 1rem;
+  }
+
+  .comment textarea {
+    min-height: 80px;
+    font-size: 0.9rem;
+  }
+
+  .submit-button,
+  .cancel-button {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .order-row {
+    flex-direction: column;
+  }
+
+  .order-column {
+    margin-bottom: 2rem;
+  }
+
+  .order-number-column {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .view-details-btn {
+    margin-top: 0.5rem;
+  }
+}
