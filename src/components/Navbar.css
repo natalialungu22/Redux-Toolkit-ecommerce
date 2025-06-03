@@ -3,7 +3,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: #d0cccc;
+  background-color: #2c3e50;
+  border-radius: 10px;
   border-bottom: 1px solid #eaeaea;
   position: sticky;
   top: 0;
@@ -15,14 +16,14 @@
   font-size: 1.8rem;
   font-weight: 700;
   text-decoration: none;
-  color: #2c3e50;
+  color: #ffffff;
   letter-spacing: -0.5px;
   transition: color 0.3s;
   margin-right: auto;
 }
 
 .navbar-brand:hover {
-  color: #424242;
+  color: #ceae11;
 }
 
 .navbar-search {
@@ -370,7 +371,7 @@
   .category-filter {
     margin: 10px 0;
   }
-  
+
   .category-filter button {
     margin-bottom: 8px;
   }
