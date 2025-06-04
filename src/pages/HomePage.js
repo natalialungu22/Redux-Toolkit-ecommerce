@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import ProductList from '../components/ProductList';
@@ -19,17 +19,6 @@ const HomePage = () => {
   } = useSelector((state) => state.product);
   const { selectedCategory } = useSelector((state) => state.category);
   const location = useLocation();
-  const [isMobile, setIsMobile] = useState(false);
-
-  useLayoutEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   useEffect(() => {
     dispatch(fetchProducts());
