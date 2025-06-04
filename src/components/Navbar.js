@@ -7,27 +7,23 @@ import { logoutUser } from '../store/authSlice';
 import { useNavigate } from 'react-router-dom';
 import {
   RiShoppingCart2Line,
-  RiMenu3Line,
   RiSearchLine,
   RiFileList2Line,
   RiLogoutBoxRLine,
 } from 'react-icons/ri';
-import CategoryFilter from './CategoryFilter';
 
 import './Navbar.css';
 
+export const SearchContext = React.createContext();
+
 const Navbar = () => {
   const dispatch = useDispatch();
-  const filter = useSelector((state) => state.product.filter);
-  const products = useSelector((state) => state.product.data);
-  const allProducts = useSelector((state) => state.product.initData);
-
-  const cartItems = useSelector((state) => state.cart.items);
   const navigate = useNavigate();
+  const filter = useSelector((state) => state.product.filter);
+  const allProducts = useSelector((state) => state.product.initData);
+  const cartItems = useSelector((state) => state.cart.items);
   const [searchInput, setSearchInput] = useState(filter || '');
   const { isAuthenticated, user } = useSelector((state) => state.auth);
-
-  const [menuOpen, setMenuOpen] = useState(false);
   const [searchExpanded, setSearchExpanded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -48,26 +44,21 @@ const Navbar = () => {
     e.preventDefault();
     const searchTerm = searchInput.trim().toLowerCase();
     if (searchTerm) {
-      dispatch(updateFilter(searchTerm));
+      const matchingProducts = allProducts.filter((product) =>
+        product.title.toLowerCase().includes(searchTerm)
+      );
 
-      setTimeout(() => {
-        const filteredProducts = products;
-        if (filteredProducts.length > 0) {
-          const matchingProduct = allProducts.find((product) =>
-            product.title.toLowerCase().includes(searchTerm)
-          );
-          const selectedCat = matchingProduct
-            ? matchingProduct.category.name
-            : filteredProducts[0].category.name;
-          dispatch(setSelectedCategory(selectedCat));
-        } else {
-          dispatch(setSelectedCategory(null));
-        }
-      }, 0);
-
+      if (matchingProducts.length > 0) {
+        const selectedCat = matchingProducts[0].category.name;
+        dispatch(updateFilter(searchTerm));
+        dispatch(setSelectedCategory(selectedCat));
+        navigate(`/category/${selectedCat.toLowerCase()}`);
+      } else {
+        dispatch(setSelectedCategory(null));
+        navigate('/');
+      }
       setSearchInput('');
       setSearchExpanded(false);
-      navigate('/');
     }
   };
 
@@ -82,12 +73,11 @@ const Navbar = () => {
     navigate('/');
   };
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
-
   const toggleSearch = () => {
     setSearchExpanded(!searchExpanded);
+    if (isMobile) {
+      document.body.classList.toggle('search-expanded-active', !searchExpanded);
+    }
   };
 
   useEffect(() => {
@@ -98,83 +88,76 @@ const Navbar = () => {
         !event.target.closest('.search-icon')
       ) {
         setSearchExpanded(false);
+        if (isMobile) {
+          document.body.classList.remove('search-expanded-active');
+        }
       }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [searchExpanded]);
+  }, [searchExpanded, isMobile]);
 
   const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
-    <>
-      <nav className='navbar'>
-        <button className='menu-toggle d-mobile-only' onClick={toggleMenu}>
-          <RiMenu3Line />
-        </button>
+    <nav className='navbar'>
+      <Link to='/' className='navbar-brand' onClick={handleHomeClick}>
+        RetailNest
+      </Link>
 
-        <Link to='/' className='navbar-brand' onClick={handleHomeClick}>
-          RetailNest
+      <button className='search-icon' onClick={toggleSearch}>
+        <RiSearchLine />
+      </button>
+
+      {user && (
+        <Link to='/my-orders' className='nav-link' title='My Orders'>
+          <RiFileList2Line size={24} />
         </Link>
+      )}
 
-        <button className='search-icon' onClick={toggleSearch}>
-          <RiSearchLine />
+      <Link to='/cart' className='cart-link nav-link'>
+        <RiShoppingCart2Line size={24} />
+        <span className='cart-quantity'>
+          {totalQuantity > 0 ? totalQuantity : ''}
+        </span>
+      </Link>
+
+      {isAuthenticated && isMobile && (
+        <button
+          onClick={handleLogout}
+          className='logout-button mobile-top-right'
+        >
+          <RiLogoutBoxRLine size={24} />
         </button>
+      )}
 
-        {user && (
-          <Link to='/my-orders' className='nav-link' title='My Orders'>
-            <RiFileList2Line size={24} />
-          </Link>
-        )}
+      {searchExpanded && (
+        <form onSubmit={handleSearch} className='search-expanded'>
+          <input
+            type='text'
+            name='searchInput'
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            placeholder='Search products...'
+            autoFocus
+          />
+          <button type='submit'>Search</button>
+        </form>
+      )}
 
-        <Link to='/cart' className='cart-link nav-link'>
-          <RiShoppingCart2Line size={24} />
-          <span className='cart-quantity'>
-            {totalQuantity > 0 ? totalQuantity : ''}
-          </span>
-        </Link>
-
-        {isAuthenticated && isMobile && (
-          <button
-            onClick={handleLogout}
-            className='logout-button mobile-top-right'
-          >
-            <RiLogoutBoxRLine size={24} />
+      <div className='nav-group'>
+        {isAuthenticated && !isMobile ? (
+          <button onClick={handleLogout} className='logout-button'>
+            Logout
           </button>
-        )}
-
-        {searchExpanded && (
-          <form onSubmit={handleSearch} className='search-expanded'>
-            <input
-              type='text'
-              name='searchInput'
-              value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
-              placeholder='Search products...'
-              autoFocus
-            />
-            <button type='submit'>Search</button>
-          </form>
-        )}
-
-        <div className={`nav-group ${menuOpen ? 'active' : ''}`}>
-          {isAuthenticated && !isMobile ? (
-            <button onClick={handleLogout} className='logout-button'>
-              Logout
-            </button>
-          ) : !isAuthenticated ? (
-            <Link to='/login' className='nav-link'>
-              Login
-            </Link>
-          ) : null}
-        </div>
-
-        <div className={`mobile-categories ${menuOpen ? 'active' : ''}`}>
-          <CategoryFilter />
-        </div>
-      </nav>
-    </>
+        ) : !isAuthenticated ? (
+          <Link to='/login' className='nav-link'>
+            Login
+          </Link>
+        ) : null}
+      </div>
+    </nav>
   );
 };
 

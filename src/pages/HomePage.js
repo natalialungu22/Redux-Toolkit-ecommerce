@@ -6,6 +6,9 @@ import CategoryFilter from '../components/CategoryFilter';
 import { fetchProducts, updateFilter } from '../store/productSlice';
 import { fetchCategories } from '../store/categorySlice';
 import Breadcrumb from '../components/Breadcrumb';
+import bannerImage from '../assets/banner.png';
+
+import './HomePage.css';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -41,21 +44,20 @@ const HomePage = () => {
     }
   }, [location.state, filter, products.length, dispatch]);
 
-  const filteredProducts = (() => {
-    if (!filter) {
-      return selectedCategory
-        ? products.filter(
-            (product) => product.category.name === selectedCategory
-          )
-        : products;
-    }
-    return products;
-  })();
+  const filteredProducts = !filter
+    ? selectedCategory
+      ? products.filter((product) => product.category.name === selectedCategory)
+      : products
+    : products;
 
   return (
     <div>
       {selectedCategory && <Breadcrumb />}
-      {!isMobile && <CategoryFilter />}
+
+      <div className='banner-container'>
+        <img src={bannerImage} alt='Banner' className='banner-image' />
+      </div>
+      <CategoryFilter />
       <ProductList
         products={filteredProducts}
         status={status}

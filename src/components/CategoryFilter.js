@@ -1,38 +1,33 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { setSelectedCategory } from '../store/categorySlice';
-import { clearFilter } from '../store/productSlice';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import './CategoryFilter.css';
 
 const CategoryFilter = () => {
-  const dispatch = useDispatch();
-  const { categories, selectedCategory } = useSelector(
-    (state) => state.category
-  );
+  const navigate = useNavigate();
+  const { categories } = useSelector((state) => state.category);
 
   const handleCategorySelect = (categoryName) => {
-    dispatch(clearFilter());
-    dispatch(setSelectedCategory(categoryName));
+    navigate(`/category/${encodeURIComponent(categoryName)}`);
   };
 
   return (
-    <div className='category-filter'>
-      <button
-        className={!selectedCategory ? 'active' : ''}
-        onClick={() => handleCategorySelect(null)}
-      >
-        All
-      </button>
-      {categories.slice(0, 5).map((category) => (
-        <button
-          key={category.id}
-          className={selectedCategory === category.name ? 'active' : ''}
-          onClick={() => handleCategorySelect(category.name)}
-        >
-          {category.name}
-        </button>
-      ))}
-    </div>
+    <>
+      <h2>CATEGORIES</h2>
+      <div className='category-filter'>
+        {categories.slice(0, 5).map((category) => (
+          <div key={category.id}>
+            <img
+              src={category.image}
+              alt={category.name}
+              className='category-image'
+              onClick={() => handleCategorySelect(category.name)}
+            />
+            <h3>{category.name}</h3>
+          </div>
+        ))}
+      </div>
+    </>
   );
 };
 

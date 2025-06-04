@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import CartPage from './pages/CartPage';
 import ProductDetail from './pages/ProductDetail';
+import CategoryPage from './pages/CategoryPage';
 import Checkout from './pages/Checkout';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -23,6 +24,7 @@ function App() {
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/product/:id' element={<ProductDetail />} />
+            <Route path='/category/:categoryName' element={<CategoryPage />} />
             <Route path='/cart' element={<CartPage />} />
             <Route path='/checkout' element={<Checkout />} />
             <Route path='/login' element={<Login />} />
