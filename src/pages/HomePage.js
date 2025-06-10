@@ -17,6 +17,7 @@ const HomePage = () => {
     status,
     filter,
   } = useSelector((state) => state.product);
+
   const { selectedCategory } = useSelector((state) => state.category);
   const location = useLocation();
 

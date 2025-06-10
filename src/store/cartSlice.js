@@ -9,26 +9,28 @@ const cartSlice = createSlice({
   reducers: {
     addToCart(state, action) {
       const item = action.payload;
-      const existingItem = state.items.find((i) => i.id === item.id);
-      if (existingItem) {
-        existingItem.quantity = item.quantity;
+      const existingItemIndex = state.items.findIndex((i) => i.id === item.id);
+      if (existingItemIndex !== -1) {
+        state.items = state.items.map((i, index) =>
+          index === existingItemIndex ? { ...i, quantity: item.quantity } : i
+        );
       } else {
         state.items.push({ ...item });
       }
     },
+
     removeFromCart(state, action) {
       const itemId = action.payload;
       state.items = state.items.filter((item) => item.id !== itemId);
     },
+
     updateQuantity(state, action) {
       const { id, quantity } = action.payload;
-      const itemIndex = state.items.findIndex((i) => i.id === id);
-      if (itemIndex !== -1) {
-        state.items[itemIndex].quantity = Math.max(1, quantity);
-      } else {
-        // console.log(`Item ${id} not found in cart for update`);
-      }
+      state.items = state.items.map((item) =>
+        item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item
+      );
     },
+
     clearCart(state) {
       state.items = [];
     },

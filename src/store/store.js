@@ -11,4 +11,5 @@ export default configureStore({
     cart: cartReducer,
     auth: authReducer,
   },
+  devTools: true,
 });
